@@ -1,6 +1,6 @@
 {
     "name": "arafatkn/laravel-bkash",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "bKash Tokenized Payment Gateway Implementation for Laravel",
     "keywords": ["laravel", "bkash", "payment", "gateway"],
     "homepage": "https://github.com/arafatkn/laravel-bkash",

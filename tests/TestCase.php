@@ -29,5 +29,6 @@ abstract class TestCase extends OrchestraTestCase
         $app['config']->set('bkash.username', 'test_username');
         $app['config']->set('bkash.password', 'test_password');
         $app['config']->set('bkash.debug', false);
+        $app['config']->set('bkash.cache.refresh_token_lifetime', 86400 * 7);
     }
 }

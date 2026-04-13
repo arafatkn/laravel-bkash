@@ -16,6 +16,10 @@ return [
 	'sandbox_base_url' => 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized',
 	'live_base_url' => 'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized',
 
+	'cache' => [
+		'refresh_token_lifetime' => 60 * 60 * 24 * 7, // 7 days
+	],
+
 	'default_currency' => 'BDT',
 	'default_intent' => 'sale',
 ];

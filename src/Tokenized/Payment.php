@@ -76,7 +76,7 @@ class Payment
         $idTokenLifetime = ((int) ($data['expires_in'] ?? 3600)) - 10;
 
         Cache::put($this->tokenCacheKey, $data['id_token'], $idTokenLifetime);
-        Cache::put($this->refreshTokenCacheKey, $data['refresh_token'], 86400 * 7); // 7 days
+        Cache::put($this->refreshTokenCacheKey, $data['refresh_token'], config('bkash.cache.refresh_token_lifetime', 86400 * 7));
 
         return $data['id_token'];
     }
@@ -166,14 +166,14 @@ class Payment
     // Refund
     // -------------------------------------------------------------------------
 
-    public function refundTransaction(array $data): array
+    public function refundPayment(string $paymentID, string $trxID, array $data = []): array
     {
         $url  = "{$this->baseUrl}/checkout/payment/refund";
         $body = [
-            'paymentID' => $data['paymentID'],
-            'trxID'     => $data['trxID'],
-            'amount'    => $data['amount'],
-            'reason'    => $data['reason'],
+            'paymentID' => $paymentID,
+            'trxID'     => $trxID,
+            'amount'    => $data['amount'] ?? '',
+            'reason'    => $data['reason'] ?? '',
             'sku'       => $data['sku'] ?? 'NA',
         ];
 

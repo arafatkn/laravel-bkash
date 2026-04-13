@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static array  executePayment(string $paymentID)
  * @method static array  queryPayment(string $paymentID)
  * @method static array  searchTransaction(string $trxID)
- * @method static array  refundTransaction(array $data)
+ * @method static array  refundPayment(string $paymentID, string $trxID, array $data = [])
  *
  * @see \Arafatkn\LaravelBkash\Tokenized\Payment
  */

@@ -76,7 +76,7 @@ class Payment
         $idTokenLifetime = ((int) ($data['expires_in'] ?? 3600)) - 10;
 
         Cache::put($this->tokenCacheKey, $data['id_token'], $idTokenLifetime);
-        Cache::put($this->refreshTokenCacheKey, $data['refresh_token'], 86400); // 1 day
+        Cache::put($this->refreshTokenCacheKey, $data['refresh_token'], 86400 * 7); // 7 days
 
         return $data['id_token'];
     }

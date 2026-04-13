@@ -8,12 +8,11 @@ use Illuminate\Support\Facades\Facade;
  * @method static array  grantToken()
  * @method static string getToken()
  * @method static array  refreshToken(string $refreshToken)
- * @method static array  createPayment(string $amount, string $merchantInvoiceNumber, string $callbackURL, string $currency = null, string $intent = null)
+ * @method static array  createPayment(array $data)
  * @method static array  executePayment(string $paymentID)
  * @method static array  queryPayment(string $paymentID)
  * @method static array  searchTransaction(string $trxID)
- * @method static array  refundTransaction(string $paymentID, string $trxID, string $amount, string $reason, string $sku = 'NA')
- * @method static array  queryRefund(string $paymentID, string $trxID, string $amount, string $reason, string $sku = 'NA')
+ * @method static array  refundTransaction(array $data)
  *
  * @see \Arafatkn\LaravelBkash\Tokenized\Payment
  */

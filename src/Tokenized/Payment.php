@@ -106,22 +106,17 @@ class Payment
     // Payment
     // -------------------------------------------------------------------------
 
-    public function createPayment(
-        string $amount,
-        string $merchantInvoiceNumber,
-        string $callbackURL,
-        string $currency = null,
-        string $intent = null
-    ): array {
+    public function createPayment(array $data): array
+    {
         $url  = "{$this->baseUrl}/checkout/create";
         $body = [
             'mode'                  => '0011',
-            'payerReference'        => ' ',
-            'callbackURL'           => $callbackURL,
-            'amount'                => $amount,
-            'currency'              => $currency ?? config('bkash.default_currency', 'BDT'),
-            'intent'                => $intent ?? config('bkash.default_intent', 'sale'),
-            'merchantInvoiceNumber' => $merchantInvoiceNumber,
+            'payerReference'        => $data['payerReference'] ?? '',
+            'callbackURL'           => $data['callbackURL'],
+            'amount'                => $data['amount'],
+            'currency'              => $data['currency'] ?? config('bkash.default_currency', 'BDT'),
+            'intent'                => $data['intent'] ?? config('bkash.default_intent', 'sale'),
+            'merchantInvoiceNumber' => $data['merchantInvoiceNumber'],
         ];
 
         $response = Http::withHeaders($this->authHeaders())->post($url, $body);
@@ -171,48 +166,20 @@ class Payment
     // Refund
     // -------------------------------------------------------------------------
 
-    public function refundTransaction(
-        string $paymentID,
-        string $trxID,
-        string $amount,
-        string $reason,
-        string $sku = 'NA'
-    ): array {
+    public function refundTransaction(array $data): array
+    {
         $url  = "{$this->baseUrl}/checkout/payment/refund";
         $body = [
-            'paymentID' => $paymentID,
-            'trxID'     => $trxID,
-            'amount'    => $amount,
-            'reason'    => $reason,
-            'sku'       => $sku,
+            'paymentID' => $data['paymentID'],
+            'trxID'     => $data['trxID'],
+            'amount'    => $data['amount'],
+            'reason'    => $data['reason'],
+            'sku'       => $data['sku'] ?? 'NA',
         ];
 
         $response = Http::withHeaders($this->authHeaders())->post($url, $body);
 
         $this->log('POST', $url, $body, $response);
-
-        return $response->json();
-    }
-
-    public function queryRefund(
-        string $paymentID,
-        string $trxID,
-        string $amount,
-        string $reason,
-        string $sku = 'NA'
-    ): array {
-        $url    = "{$this->baseUrl}/checkout/payment/refund";
-        $params = [
-            'paymentID' => $paymentID,
-            'trxID'     => $trxID,
-            'amount'    => $amount,
-            'reason'    => $reason,
-            'sku'       => $sku,
-        ];
-
-        $response = Http::withHeaders($this->authHeaders())->get($url, $params);
-
-        $this->log('GET', $url, $params, $response);
 
         return $response->json();
     }

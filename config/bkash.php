@@ -1,0 +1,21 @@
+<?php
+
+return [
+	/*
+	|--------------------------------------------------------------------------
+	| bKash Credentials
+	|--------------------------------------------------------------------------
+	*/
+	'sandbox' => env('BKASH_SANDBOX', true),
+	'debug' => env('BKASH_DEBUG', env('APP_DEBUG', false)),
+	'app_key' => env('BKASH_APP_KEY', ''),
+	'app_secret' => env('BKASH_APP_SECRET', ''),
+	'username' => env('BKASH_USERNAME', ''),
+	'password' => env('BKASH_PASSWORD', ''),
+
+	'sandbox_base_url' => 'https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized',
+	'live_base_url' => 'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized',
+
+	'default_currency' => 'BDT',
+	'default_intent' => 'sale',
+];
